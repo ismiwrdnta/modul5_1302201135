@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 
 namespace modul5_1302201135
 {
@@ -10,7 +11,9 @@ namespace modul5_1302201135
 		List<SayaTubeVideo> uploadedVideo;
 		public string Username;
 		public SayaTubeUser(){}
-		public SayaTubeUser(string username) { 
+		public SayaTubeUser(string username) {
+			Contract.Requires(username == null, "Username kosong/null!");
+			Contract.Requires(username.Length <= 100, "Username melebihi 100 karakter!");
 			this.Username = username;
 			var rand = new Random();
 			this.id = rand.Next(10000, 99999);
@@ -28,6 +31,7 @@ namespace modul5_1302201135
 
 		public void AddVideo(SayaTubeVideo data)
         {
+			Contract.Requires(data != null, "Data video kosong!");
 			uploadedVideo.Add(data);
         }
 
